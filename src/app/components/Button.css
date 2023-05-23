@@ -1,0 +1,8 @@
+.button {
+    transition: transform 0.3s; /* Adjust the duration to match the setTimeout duration */
+}
+
+.button.scaled {
+    transform: scale(0.5);
+}
+  

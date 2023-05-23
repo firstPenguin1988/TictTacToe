@@ -1,0 +1,65 @@
+.board_style{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    justify-items: center;
+    align-items: center;
+    grid-gap: 4px;
+    margin-bottom: 20px;
+}
+
+
+.ripple_style {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 130px;
+    height: 130px;
+    top: -15px;
+    left: -15px;
+    animation: ripple 1s;
+    opacity: 0;
+}
+  
+@keyframes ripple {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+/* .btn {
+    transition: transform 0.3s;
+}
+
+.btn.scaled {
+    transform: scale(0.5);
+} 
+*/
+
+/*======================================================*/
+
+/* .btnModuleStyle{
+    border:"none";
+    border-radius:'10px';
+    height:'100px';
+    width:'100px';
+    font-size: '50px';
+    font-weight: '800';
+    font-family: 'Roboto Slab';
+} 
+
+.animation {
+    animation-name: example;
+    animation-duration: '1s';
+}
+
+@keyframes example {
+    from { transform: scale(0.5,0.5);}
+    to { transform: scale(1,1);}
+}
+*/
