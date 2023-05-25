@@ -1,3 +1,6 @@
+/* *{
+    font-family: 'Roboto Slab';
+} */
 .board_style{
     display: grid;
     grid-template-columns: repeat(3,100px);
@@ -7,7 +10,7 @@
     margin-bottom: 20px;
 }
 
-
+/*
 .ripple_style {
     position: absolute;
     border-radius: 50%;
@@ -31,6 +34,7 @@
         transform: scale(1);
     }
 }
+*/
 
 /* .btn {
     transition: transform 0.3s;

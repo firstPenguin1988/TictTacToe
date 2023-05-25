@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import './Board.css'
+import styles from './Board.module.css';
 import Head from "next/head";
 import useMouseClickPosition from "./useMouseCoordinates";
 
@@ -34,8 +34,6 @@ const Board2 = () =>{
     const [nextIsX, setNextIsX] = useState(true);
     const [tileArr, setTileArr] = useState(Array(9).fill(null));
     const [toggleColor, setToggleColor] = useState(false);
-    //const [animation, setAnimation] = useState(false);
-    //const [ripple, setRipple] = useState(false);
 
     logger("tiles",tileArr);
 
@@ -108,7 +106,7 @@ const Board2 = () =>{
             <h1>Tic-Tac-Toe</h1>
             <h3>{result}</h3>
 
-            <div className={'board_style'}>
+            <div className={styles.board_style}>
                 {
                     tileArr.map((item, index) => <Tile onTileClick={() => handleClick(index)} toggleColor={toggleColor} key={index} value={item} />)
                 }
@@ -129,9 +127,6 @@ const logger = (title:string,smth:any) =>{
 export default Board2
 
 interface TileProps {
-    //scale: number;
-    //ripple: boolean;
-    //animation: boolean;
     toggleColor: boolean;
     value: string;
     onTileClick: () => void;
@@ -139,75 +134,46 @@ interface TileProps {
 
 const Tile = ({toggleColor, value, onTileClick}: TileProps) =>{  
     const [animation, setAnimation] = useState(false);
-    //const { mousePosition, handleMouseClick } = useMouseClickPosition();
-    //const { clientX, clientY } = useMousePosition();
     const mousePosition = useMouseClickPosition();
     
     const handleClick = () => {
-        console.log(`X: ${mousePosition.clientX}, Y:${mousePosition.clientY}`)
         onTileClick();
         setAnimation(true);
 
         setTimeout(() => {
             setAnimation(false);
         }, 300)
+
+        console.log(`mouseX: ${mousePosition.x}  mouseY: ${mousePosition.y}`);
     }
-    //console.log(`left: ${bounding.left}, top: ${bounding.top}, width: ${bounding.width}, height: ${bounding.height}`);
+    
     
     
     const rippleKeyframe = `
         @keyframes ripple {
             0% {
-                opacity: 1;
-                transform: translate(0, 0);
+                opacity: 1;              
                 transform: scale(0)
             }
         
             100% {
                 opacity: 0;
-                transform: translate(20, 20);
                 transform: scale(1)
             }
         }
     `;
         
-    /*
-    const rippleKeyframe = `
-        @keyframes ripple {
-            from {
-                opacity: 1;
-                transform: scale(0);
-            }
-        
-            to {
-                opacity: 0;
-                transform: scale(1);
-            }
-        }
-    `;
-    */
 
     const styleWithRipple: React.CSSProperties = {
         position: 'absolute',
         borderRadius: '50%',
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        width: 100,
-        height: 100,
-        // top: -1,
-        // left: -1,
+        width: '100px',
+        height: '100px',
         animation: 'ripple 1s',
-        opacity: 1,
-
-
-        // width:20,
-        // height:20,
-        top: mousePosition.clientY,
-        left: mousePosition.clientX,
-        // transform: animation ? 'scale(1)' : 'scale(0)',
-        // opacity: animation ? 1 : 0,
-        // transition: 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out',
-        //top: mousePosition.clientY - 50, // Adjust the values according to your needs
-        //left: mousePosition.clientX - 50, // Adjust the values according to your needs
+        overflow: 'hidden',
+        top: mousePosition.y,
+        left: mousePosition.x,
     }
 
     return (
@@ -217,9 +183,8 @@ const Tile = ({toggleColor, value, onTileClick}: TileProps) =>{
                 //className={`btn ${animation ? 'scaled' : ''}`}
                 style={{ 
                     ...btnStyle, 
-                    //transition: 'scale 0.5s ease-in-out',
-                    //scale: `scale(${scale})`,
                     position: 'relative',
+                    userSelect: 'none',
                     pointerEvents: ((value==='X' || value==='O') || animation) ? 'none' : 'auto',
                     transform: ((value==='X' || value==='O') && animation) ? 'scale(0.8)' : 'none',
                     color: (toggleColor) ? ((value === 'X') ? '#FF5656' : '#5888FF') : ((value === 'X') ? '#5888FF' : '#FF5656') , 
@@ -229,8 +194,8 @@ const Tile = ({toggleColor, value, onTileClick}: TileProps) =>{
             >
                 {value}
                 {
-                    animation && <span style={styleWithRipple} /> //className={'ripple_style'} />
-                }
+                    animation && <span style={{...styleWithRipple }}/>
+                }    
             </button>
         </div>
     )
@@ -250,17 +215,13 @@ const Tile = ({toggleColor, value, onTileClick}: TileProps) =>{
     
 }
 
-//false  color: (value === 'X') ? '#5888FF' : '#FF5656', backgroundColor: (value === 'X') ? '#C3D5FF' : value === 'O' ? '#FFBDBD' : '#eee'
-//true   color: (value === 'X') ? '#FF5656' : '#5888FF', backgroundColor: (value === 'X') ? '#FFBDBD' : value === 'O' ? '#C3D5FF' : '#eee'
-
 const btnStyle = {
     border:"none",
     borderRadius:'10px',
     height:'100px',
     width:'100px',
-    fontSize: '50px',
-    fontWeight: '800',
-    fontFamily: 'Roboto Slab',
+    fontSize: '52px',
+    fontWeight: 900,
     transition: 'transform 0.3s' 
 }
 

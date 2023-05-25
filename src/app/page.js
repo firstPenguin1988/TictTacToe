@@ -1,15 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import Board2 from "./components/Board2";
-import ButtonScale from "./components/ButtonScale";
-import ButtonWithRipple from "./components/ButtonWithRipple";
-
+//import ButtonScale from "./components/ButtonScale";
+//import ButtonWithRipple from "./components/ButtonWithRipple";
+//import Todo from "./components/ToDo/Todo";
+//import CounterRef from "./components/ToDo/CounterRef";
 
 export default function App() {
   //return <ButtonWithRipple />
   return <Board2 />
   //return <ButtonScale />
+  //return <CounterRef />
 }
+
+/*================Final========================
 
 function Square({ value, onSquareClick }) {
   return (
@@ -97,6 +101,7 @@ const board = {
   gridTemplateColumns: 'repeat(3, 1fr)',
   
 }
+==========================FINAL==================================*/
 
 /*
 import { useState } from "react";
